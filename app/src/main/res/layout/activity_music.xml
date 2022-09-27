@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android ="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="top"
+    tools:context=".MusicActivity">
+
+    <Button
+        android:id="@+id/btnVoltar"
+        android:layout_width="410dp"
+        android:layout_height="90dp"
+        android:layout_gravity="bottom"
+        android:backgroundTint="@color/reds"
+        android:text="Voltar"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-7dp"
+        tools:layout_editor_absoluteY="-10dp" />
+
+    <Button
+        android:id="@+id/btninternet"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="0dp"
+        android:onClick="GetUrlFromIntent"
+        android:layout_centerInParent="true"
+        android:text="Play externo"
+        android:backgroundTint="@color/black"
+        android:textColor="@color/reds"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imgMus"
+        app:layout_constraintEnd_toStartOf="@+id/btnpause"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnVoltar" />
+    <Button
+        android:id="@+id/btnplay"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="0dp"
+        android:backgroundTint="@color/black"
+        android:textColor="@color/reds"
+        android:onClick="play"
+        android:text="Play interno"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imgMus"
+        app:layout_constraintEnd_toStartOf="@+id/btnpause"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnVoltar" />
+
+    <Button
+        android:id="@+id/btnpause"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="0dp"
+        android:onClick="pause"
+        android:text="Pausar"
+        android:backgroundTint="@color/black"
+        android:textColor="@color/reds"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imgMus"
+        app:layout_constraintEnd_toStartOf="@+id/btnparar"
+        app:layout_constraintStart_toEndOf="@+id/btnplay"
+        app:layout_constraintTop_toBottomOf="@+id/btnVoltar"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnparar"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/black"
+        android:textColor="@color/reds"
+        android:onClick="parar"
+        android:text="Encerrar"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imgMus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnpause"
+        app:layout_constraintTop_toBottomOf="@+id/btnVoltar" />
+
+    <ImageView
+        android:id="@+id/imgMus"
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
+        android:foregroundGravity="bottom"
+        app:srcCompat="@drawable/musics"
+        tools:layout_editor_absoluteX="200dp"
+        tools:layout_editor_absoluteY="291dp"
+      />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="322dp"
+        android:layout_height="68dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:gravity="bottom"
+        android:text="Musica Something and no way do grupo Nirvana-2022"
+        android:textColor="@color/white"
+        android:textStyle="italic"
+        android:textSize="16dp"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="647dp"
+        android:backgroundTint="@color/black"/>
+
+
+</LinearLayout>

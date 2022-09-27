@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Localizacao">
+
+    <Button
+        android:id="@+id/btnVoltar"
+        android:layout_width="412dp"
+        android:layout_height="91dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/reds"
+        android:text="@string/voltar"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-12dp" />
+
+    <TextView
+        android:id="@+id/addressText"
+        android:layout_width="382dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/coordenadas_linkadas_ao_batsinal"
+        android:textAlignment="center"
+        android:textColor="@color/reds"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationButton" />
+
+    <Button
+        android:id="@+id/locationButton"
+        android:layout_width="288dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/black"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:text="@string/envie_suas_coordenadas"
+        android:textAllCaps="false"
+        android:textColor="@color/reds"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/addressText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="436dp"
+        android:layout_height="291dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="150dp"
+        android:src="@drawable/batmovel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="371dp"
+        android:layout_height="185dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="-80dp"
+        android:src="@drawable/sinal"
+        app:layout_constraintBottom_toTopOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addressText" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nav_view"
+        android:layout_gravity="bottom"
+        android:background="#000000"
+        app:itemIconTint="@color/reds"
+        app:itemTextColor="@color/reds"
+        app:menu="@menu/menu_xml_file"
+        />
+
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="match_parent"
+        android:layout_height="556dp"
+        app:srcCompat="@drawable/logicon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:text="SEJA BEM VINDO Á GOTHAM..."
+        android:textStyle="bold"
+        android:textColor="@color/reds"
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:gravity="bottom"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
