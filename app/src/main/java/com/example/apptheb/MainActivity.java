@@ -27,19 +27,19 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId())
                 {
                     case R.id.filme_menu:
-                        OpenFilmeteste();
+                        OpenTab(FilmeActivity.class);
                         return true;
                     case R.id.music:
-                        OpenMusic();
+                        OpenTab(MusicActivity.class);
                         return true;
                     case R.id.sinal:
-                        OpenSinal();
+                        OpenTab(SinalActivity.class);
                         return true;
                     case R.id.local:
-                        OpenLocalizacao();
+                        OpenTab(Localizacao.class);
                         return true;
                     case R.id.mais:
-                        OpenMais();
+                        OpenTab(MaisActivity.class);
                         return true;
                     default:
                         return false;
@@ -49,27 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
 
-
-    }
-    public void OpenFilmeteste() {
-        Intent intent = new Intent(this, FilmeActivity.class);
-        startActivity(intent);
-    }
-    public void OpenMusic() {
-        Intent intent = new Intent(this, MusicActivity.class);
-        startActivity(intent);
-    }
-    public void OpenSinal() {
-        Intent intent = new Intent(this, SinalActivity.class);
-        startActivity(intent);
-    }
-    public void OpenLocalizacao() {
-        Intent intent = new Intent(this, Localizacao.class);
-        startActivity(intent);
-    }
-    public void OpenMais() {
-        Intent intent = new Intent(this, MaisActivity.class);
+    public void OpenTab(Class tab){
+        Intent intent = new Intent(this, tab);
         startActivity(intent);
     }
 }
