@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="reds">#b40909</color>
+    <color name="batman_yellow">#E7FF54</color>
+    <color name="night_wing_blue">#1C8BC6</color>
 </resources>

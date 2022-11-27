@@ -4,15 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fundotela"
+    android:background="#121212"
     tools:context=".SplashActivity">
-
-    <ImageView
-        android:layout_width="1000dp"
-        android:layout_height="400dp"
-        android:layout_marginTop="80dp"
-
-        android:src="@drawable/logothebatman" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,19 +15,40 @@
         android:gravity="bottom"
         android:padding="20dp"
         android:text="CARREGANDO... PROJETO GOTHAN"
-        android:textColor="#000000"
+        android:textColor="#eeeeee"
         android:textStyle="bold" />
 
     <ProgressBar
         android:id="@+id/pb"
         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="242dp"
+        android:layout_height="82dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="85dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:layout_marginTop="250dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="141dp"
+        android:backgroundTint="#f00"
         android:foregroundGravity="center_horizontal"
+        android:progressBackgroundTint="#121212"
         android:scrollbarSize="@dimen/material_emphasis_medium"
         android:scrollbarStyle="insideOverlay" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="253dp"
+        android:layout_height="181dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="184dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="190dp"
+        app:srcCompat="@drawable/night_wing_logo_outline" />
 
 </RelativeLayout>
