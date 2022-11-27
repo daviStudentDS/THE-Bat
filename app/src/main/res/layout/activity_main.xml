@@ -17,6 +17,7 @@
         app:itemTextColor="@color/night_wing_blue"
         app:menu="@menu/menu_xml_file"
         />
+
     <ImageView
         android:id="@+id/img_logo"
         android:layout_width="250dp"
@@ -28,6 +29,7 @@
         android:layout_marginTop="124dp"
         android:layout_marginEnd="17dp"
         android:layout_marginBottom="190dp"
+        android:onClick="gotoThemeSelect"
         app:srcCompat="@drawable/circle_night_wing_logo" />
 
     <TextView

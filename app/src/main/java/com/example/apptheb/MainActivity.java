@@ -14,6 +14,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
 
+    public void gotoThemeSelect(View v){
+        openTab(SelectTheme.class);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,19 +31,19 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId())
                 {
                     case R.id.filme_menu:
-                        OpenTab(FilmeActivity.class);
+                        openTab(FilmeActivity.class);
                         return true;
                     case R.id.music:
-                        OpenTab(MusicActivity.class);
+                        openTab(MusicActivity.class);
                         return true;
                     case R.id.sinal:
-                        OpenTab(SinalActivity.class);
+                        openTab(SinalActivity.class);
                         return true;
                     case R.id.local:
-                        OpenTab(Localizacao.class);
+                        openTab(Localizacao.class);
                         return true;
                     case R.id.mais:
-                        OpenTab(MaisActivity.class);
+                        openTab(MaisActivity.class);
                         return true;
                     default:
                         return false;
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void OpenTab(Class tab){
+    public void openTab(Class tab){
         Intent intent = new Intent(this, tab);
         startActivity(intent);
     }

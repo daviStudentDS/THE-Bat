@@ -35,6 +35,7 @@ public class SelectTheme extends AppCompatActivity {
         ligado = settings.getBoolean("theme", false);
         img.setImageResource(ligado ? R.drawable.batman_logo_outline : R.drawable.night_wing_logo_outline);
         swtTheme.setChecked(ligado);
+        swtTheme.setText(ligado ? "Batman" : "Asa Noturna");
     }
 
 
