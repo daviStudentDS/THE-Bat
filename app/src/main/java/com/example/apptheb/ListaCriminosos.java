@@ -1,110 +1,105 @@
 package com.example.apptheb;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import android.os.Bundle;
+import android.app.Activity;
 import android.os.Environment;
 import android.view.View;
-import android.widget.Toast;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class ListaCriminosos extends AppCompatActivity {
-    private boolean mExternalStorageAvaible = false;
-    private boolean mExternalStorageWriteable = false;
 
-    public void gerarRelatorio(View v){
+    EditText inputText;
+    TextView response;
+    Button saveButton,readButton;
 
-        String state = Environment.getExternalStorageState();
-
-
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE
-        ) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-        }
-
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE
-        ) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        }
-        else {
-            if(Environment.MEDIA_MOUNTED.equals(state)){
-                mExternalStorageAvaible = mExternalStorageWriteable = true;
-
-                try{
-                    File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                    if(!dir.exists()){
-                        boolean success = dir.mkdirs();
-
-                        Toast.makeText(this, success ? "s1" : "f1", Toast.LENGTH_SHORT).show();
-                    }
-                    File subDir = new File(dir, "/personagens/");
-                    if(!subDir.exists()){
-                        boolean success = subDir.mkdirs();
-
-                        // Toast.makeText(this, success ? "s2" : "f2", Toast.LENGTH_SHORT).show();
-                    }
-                    File arquivo = new File(dir, "teste.obj");
-
-                    FileWriter fileWriter = new FileWriter(arquivo);
-                    BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                    bufferedWriter.write("salve");
-                    bufferedWriter.close();
-                    Toast.makeText(this, arquivo.getAbsolutePath(), Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-                /*
-                try{
-                    Personagem objeto = new Personagem("Muié do curinga", "Harley queen", "Batman bem antigo");
-                    FileOutputStream fos = new FileOutputStream(arquivo);
-                    ObjectOutputStream oos = new ObjectOutputStream(fos);
-                    oos.writeObject(objeto);
-                    oos.close();
-                    fos.close();
-                }
-                catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-                 */
-            }
-
-            if((Environment.MEDIA_MOUNTED_READ_ONLY.equals(state))){
-                mExternalStorageAvaible = true;
-                mExternalStorageWriteable = false;
-            }
-
-            else{
-                mExternalStorageAvaible = mExternalStorageWriteable = false;
-            }
-        }
-
-
-    }
+    private String filename = "SampleFile.txt";
+    private String filepath = "MyFileStorage";
+    File myExternalFile;
+    String myData = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_criminosos);
 
+        inputText = (EditText) findViewById(R.id.myInputText);
+        response = (TextView) findViewById(R.id.response);
+
+
+         saveButton =
+                (Button) findViewById(R.id.saveExternalStorage);
+        saveButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    FileOutputStream fos = new FileOutputStream(myExternalFile);
+                    fos.write(inputText.getText().toString().getBytes());
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                inputText.setText("");
+                response.setText("SampleFile.txt saved to External Storage...");
+            }
+        });
+
+        readButton = (Button) findViewById(R.id.getExternalStorage);
+        readButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    FileInputStream fis = new FileInputStream(myExternalFile);
+                    DataInputStream in = new DataInputStream(fis);
+                    BufferedReader br =
+                            new BufferedReader(new InputStreamReader(in));
+                    String strLine;
+                    while ((strLine = br.readLine()) != null) {
+                        myData = myData + strLine;
+                    }
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                inputText.setText(myData);
+                response.setText("SampleFile.txt data retrieved from External Storage...");
+            }
+        });
+
+        if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
+            saveButton.setEnabled(false);
+        }
+        else {
+            myExternalFile = new File(getExternalFilesDir(filepath), filename);
+        }
+
 
     }
-
+    private static boolean isExternalStorageReadOnly() {
+        String extStorageState = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {
+            return true;
+        }
+        return false;
+    }
+    private static boolean isExternalStorageAvailable() {
+        String extStorageState = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(extStorageState)) {
+            return true;
+        }
+        return false;
+    }
 
 }
