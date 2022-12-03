@@ -10,6 +10,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Environment;
@@ -18,88 +21,115 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class ListaCriminosos extends AppCompatActivity {
 
-    EditText inputText;
-    TextView response;
-    Button saveButton,readButton;
+  // EditText inputText;
+  DatabaseHelper myDb;
+  TextView response;
+  Button externalButton, internalButton;
 
-    private String filename = "listaPersonagens.txt";
-    private String filepath = "personagens";
-    File myExternalFile;
-    String myData = "";
+  private String filename = "listaPersonagens.json";
+  private String filepath = "personagens";
+  File myExternalFile;
+  String myData = "";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_criminosos);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_lista_criminosos);
+    myDb = new DatabaseHelper(this);
 
-        inputText = (EditText) findViewById(R.id.myInputText);
-        response = (TextView) findViewById(R.id.response);
+    // inputText = (EditText) findViewById(R.id.myInputText);
+    response = (TextView) findViewById(R.id.response);
 
+    externalButton = (Button) findViewById(R.id.saveExternalStorage);
+    externalButton.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        try {
+          FileOutputStream fos = new FileOutputStream(myExternalFile);
 
-         saveButton =
-                (Button) findViewById(R.id.saveExternalStorage);
-        saveButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    FileOutputStream fos = new FileOutputStream(myExternalFile);
-                    fos.write(inputText.getText().toString().getBytes());
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                inputText.setText("");
-                response.setText("SampleFile.txt saved to External Storage...");
-            }
-        });
+          ArrayList<Personagem> personagens = myDb.allPersonagens();
+          if (personagens.size() == 0) {
+            Toast.makeText(ListaCriminosos.this, "Nenhum Personagem cadastrado", Toast.LENGTH_SHORT).show();
+            return;
+          }
 
-        readButton = (Button) findViewById(R.id.getExternalStorage);
-        readButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    FileInputStream fis = new FileInputStream(myExternalFile);
-                    DataInputStream in = new DataInputStream(fis);
-                    BufferedReader br =
-                            new BufferedReader(new InputStreamReader(in));
-                    String strLine;
-                    while ((strLine = br.readLine()) != null) {
-                        myData = myData + strLine;
-                    }
-                    in.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                inputText.setText(myData);
-                response.setText("SampleFile.txt data retrieved from External Storage...");
-            }
-        });
+          JSONArray jLista = new JSONArray();
 
-        if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
-            saveButton.setEnabled(false);
+          for (Personagem p : personagens) {
+            jLista.put(p.getJsonObject());
+          }
+
+          fos.write(jLista.toString().getBytes());
+          fos.close();
+          String res = (filename + "Arquivo exportado para divulgação");
+          response.setText(res);
+        } catch (IOException e) {
+          e.printStackTrace();
         }
-        else {
-            myExternalFile = new File(getExternalFilesDir(filepath), filename);
+      }
+    });
+
+    internalButton = (Button) findViewById(R.id.getExternalStorage);
+    internalButton.setOnClickListener(new OnClickListener() {
+
+      @Override
+      public void onClick(View v) {
+        try {
+          File f = getFileStreamPath("backup_personagens");
+          FileOutputStream fos = new FileOutputStream(f);
+          ArrayList<Personagem> personagens = myDb.allPersonagens();
+
+          if (personagens.size() == 0) {
+            Toast.makeText(ListaCriminosos.this, "Nenhum Personagem cadastrado", Toast.LENGTH_SHORT).show();
+            return;
+          }
+
+          JSONArray jLista = new JSONArray();
+
+          for (Personagem p : personagens) {
+            jLista.put(p.getJsonObject());
+          }
+
+          fos.write(jLista.toString().getBytes());
+          fos.close();
+          String res = (filename + "Salvo internamente");
+          response.setText(res);
+        } catch (IOException e) {
+          e.printStackTrace();
         }
+      }
 
+    });
 
+    if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
+      externalButton.setEnabled(false);
+    } else {
+      myExternalFile = new File(getExternalFilesDir(filepath), filename);
     }
-    private static boolean isExternalStorageReadOnly() {
-        String extStorageState = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {
-            return true;
-        }
-        return false;
+
+  }
+
+  private static boolean isExternalStorageReadOnly() {
+    String extStorageState = Environment.getExternalStorageState();
+    if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {
+      return true;
     }
-    private static boolean isExternalStorageAvailable() {
-        String extStorageState = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(extStorageState)) {
-            return true;
-        }
-        return false;
+    return false;
+  }
+
+  private static boolean isExternalStorageAvailable() {
+    String extStorageState = Environment.getExternalStorageState();
+    if (Environment.MEDIA_MOUNTED.equals(extStorageState)) {
+      return true;
     }
+    return false;
+  }
 
 }

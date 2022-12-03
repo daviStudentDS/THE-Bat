@@ -1,6 +1,11 @@
 package com.example.apptheb;
 
-public class Personagem {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
+
+public class Personagem implements Serializable {
     private int _id;
     private String alterEgo;
     private String nome;
@@ -62,5 +67,20 @@ public class Personagem {
 
     public String getPrimeiroQuadrinho(){
         return this.primeiroQuadrinho;
+    }
+
+    public JSONObject getJsonObject(){
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("id", this._id);
+            obj.put("nome", this.nome);
+            obj.put("alter_ego", this.alterEgo);
+            obj.put("primeiro_quadrinho", this.primeiroQuadrinho);
+            obj.put("is_heroi", this.isHeroi);
+        }
+        catch (JSONException e){
+        }
+        return obj;
+
     }
 }

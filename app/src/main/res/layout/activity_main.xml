@@ -1,46 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".MainActivity">
+
+
+  <com.google.android.material.bottomnavigation.BottomNavigationView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="wrap_content"
+    android:id="@+id/nav_view"
+    android:layout_gravity="bottom"
+    android:background="#000000"
+    app:itemIconTint="@color/night_wing_blue"
+    app:itemTextColor="@color/night_wing_blue"
+    app:menu="@menu/menu_xml_file"
+  />
 
+  <ImageView
+    android:id="@+id/img_logo"
+    android:layout_width="250dp"
+    android:layout_height="288dp"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentEnd="true"
+    android:layout_marginStart="75dp"
+    android:layout_marginTop="124dp"
+    android:layout_marginEnd="17dp"
+    android:layout_marginBottom="190dp"
+    android:onClick="gotoThemeSelect"
+    app:srcCompat="@drawable/circle_night_wing_logo" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/nav_view"
-        android:layout_gravity="bottom"
-        android:background="#000000"
-        app:itemIconTint="@color/night_wing_blue"
-        app:itemTextColor="@color/night_wing_blue"
-        app:menu="@menu/menu_xml_file"
-        />
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="500dp"
+    android:text="SEJA BEM VINDO Á GOTHAM..."
+    android:textStyle="bold"
+    android:textColor="@color/night_wing_blue"
+    android:textSize="40dp"
+    android:textAlignment="center"
+    android:gravity="center" />
 
-    <ImageView
-        android:id="@+id/img_logo"
-        android:layout_width="250dp"
-        android:layout_height="288dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="124dp"
-        android:layout_marginEnd="17dp"
-        android:layout_marginBottom="190dp"
-        android:onClick="gotoThemeSelect"
-        app:srcCompat="@drawable/circle_night_wing_logo" />
+  <LinearLayout
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="1.0"
+    android:layout_marginTop="20dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="500dp"
-        android:text="SEJA BEM VINDO Á GOTHAM..."
-        android:textStyle="bold"
-        android:textColor="@color/night_wing_blue"
-        android:textSize="40dp"
-        android:textAlignment="center"
-        android:gravity="center"/>
+    <Button android:id="@+id/addPerso"
+      android:layout_width="match_parent"
+      android:backgroundTint="@color/night_wing_blue"
+      android:layout_height="wrap_content"
+      android:onClick="gotoAddPersonagem"
+      android:text="Cadastrar personagem"
+      android:layout_weight="0.5" />
+
+    <Button android:id="@+id/list"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="0.5"
+      android:backgroundTint="@color/night_wing_blue"
+      android:onClick="gotoLista"
+      android:text="Exportar Personagens" />
+
+  </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

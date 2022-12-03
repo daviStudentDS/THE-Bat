@@ -12,57 +12,57 @@ import android.view.View;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    private BottomNavigationView bottomNavigationView;
+  private BottomNavigationView bottomNavigationView;
 
-    public void gotoThemeSelect(View v){
-        openTab(SelectTheme.class);
-    }
+  public void gotoThemeSelect(View v) {
+    openTab(SelectTheme.class);
+  }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+  public void gotoAddPersonagem(View v) {
+    openTab(addPersonagem.class);
+  }
 
-        bottomNavigationView = findViewById(R.id.nav_view);
+  public void gotoLista(View v) {
+    openTab(ListaCriminosos.class);
+  }
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId())
-                {
-                    case R.id.filme_menu:
-                        // openTab(ListaCriminosos.class);
-                        openTab(addPersonagem.class);
-                        // openTab(FilmeActivity.class);
-                        return true;
-                    case R.id.music:
-                        openTab(MusicActivity.class);
-                        return true;
-                    case R.id.sinal:
-                        openTab(SinalActivity.class);
-                        return true;
-                    case R.id.local:
-                        openTab(Localizacao.class);
-                        return true;
-                    case R.id.mais:
-                        openTab(MaisActivity.class);
-                        return true;
-                    default:
-                        return false;
-                }
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
 
+    bottomNavigationView = findViewById(R.id.nav_view);
 
-
+    bottomNavigationView
+        .setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+          @Override
+          public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+              case R.id.filme_menu:
+                openTab(FilmeActivity.class);
+                return true;
+              case R.id.music:
+                openTab(MusicActivity.class);
+                return true;
+              case R.id.sinal:
+                openTab(SinalActivity.class);
+                return true;
+              case R.id.local:
+                openTab(Localizacao.class);
+                return true;
+              case R.id.mais:
+                openTab(MaisActivity.class);
+                return true;
+              default:
+                return false;
             }
+
+          }
         });
-    }
+  }
 
-    public void openTab(Class tab){
-        Intent intent = new Intent(this, tab);
-        startActivity(intent);
-    }
+  public void openTab(Class tab) {
+    Intent intent = new Intent(this, tab);
+    startActivity(intent);
+  }
 }
-
-
-
-
