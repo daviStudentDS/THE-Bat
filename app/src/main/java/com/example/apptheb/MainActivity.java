@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId())
                 {
                     case R.id.filme_menu:
-                        openTab(ListaCriminosos.class);
+                        // openTab(ListaCriminosos.class);
+                        openTab(addPersonagem.class);
                         // openTab(FilmeActivity.class);
                         return true;
                     case R.id.music:

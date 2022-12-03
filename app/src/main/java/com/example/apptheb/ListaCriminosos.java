@@ -25,8 +25,8 @@ public class ListaCriminosos extends AppCompatActivity {
     TextView response;
     Button saveButton,readButton;
 
-    private String filename = "SampleFile.txt";
-    private String filepath = "MyFileStorage";
+    private String filename = "listaPersonagens.txt";
+    private String filepath = "personagens";
     File myExternalFile;
     String myData = "";
 
